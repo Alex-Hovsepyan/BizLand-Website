@@ -1,0 +1,294 @@
+{% load static %}
+{% load skills_filter %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ header.doc_title }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icon.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+    <header>
+        <div class="top">
+            <div class="top_container">
+                <ul>
+                    <li><i class="fa-regular fa-envelope"></i> {{ header.email }}</li>
+                    <li><i class="fa-solid fa-mobile-screen-button"></i> {{ header.phone }}</li>
+                </ul>
+                <ul>
+                    <li><a href={{ header.social1 }}><i class="fa-brands fa-twitter"></i></a></li>
+                    <li><a href={{ header.social2 }}><i class="fa-brands fa-facebook"></i></a></li>
+                    <li><a href={{ header.social3 }}><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href={{ header.social4 }}><i class="fa-brands fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="bottom_container">
+                <a href="#home"><h1>{{ header.title }}</h1></a>
+                <nav class="navbar">
+                    <span onclick="menuOpen(false)"><i class="fa-solid fa-xmark"></i></span>
+                    <ul>
+                        <li><a href="#home">{{ header.path1 }}</a></li>
+                        <li><a href="#about">{{ header.path2 }}</a></li>
+                        <li><a href="#services">{{ header.path3 }}</a></li>
+                        <li><a href="#portfolio">{{ header.path4 }}</a></li>
+                        <li><a href="#team">{{ header.path5 }}</a></li>
+                        <li><a href="#pricing">{{ header.path6 }}</a></li>
+                        <li><a href="#contact">{{ header.path7 }}</a></li>
+                    </ul>
+                </nav>
+                <span onclick="menuOpen(true)" class="bar"><i class="fa-solid fa-bars"></i></span>
+            </div>
+        </div>
+    </header>
+    <section style="background-image: url({{ home.background.url }});" id="home">
+        <div class="home_container">
+            <h1>{{ home.title }} <span>{{ home.colored_title }}</span></h1>
+            <p>{{ home.text }}</p>
+            <div>
+                <a href="#contact">{{ home.button1 }}</a>
+                <a href={{ home.video_url }}><i class="fa-regular fa-circle-play"></i> {{ home.button2 }}</a>
+            </div>
+        </div>
+    </section>
+    <section class="featured_services">
+        <div class="featured_services_container">
+            {% for i in featured_services %}
+                <div class="featured_services_content">
+                    <i class="{{ i.icon }}"></i>
+                    <h5>{{ i.title }}</h5>
+                    <p>{{ i.text }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section id="about">
+        <div class="title">
+            <span>{{ titles.button1 }}</span>
+            <h1>{{ titles.title1 }} <strong>{{ titles.colored_title1 }}</strong></h1>
+            <p>{{ titles.text1 }}</p>
+        </div>
+        <div class="about_container">
+            <img src={{ about.img.url }} />
+            <div class="about_content">
+                <h3>{{ about.title }}</h3>
+                <p>{{ about.text1 }}</p>
+                <ul>
+                    {% for i in about_content %}
+                        <li>
+                            <i class="{{ i.icon }}"></i>
+                            <div>
+                                <h4>{{ i.title }}</h4>
+                                <p>{{ i.text }}</p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <p>{{ about.text2 }}</p>
+            </div>
+        </div>
+    </section>
+    <section class="skills">
+        <div class="skills_container">
+            {% for i in skills %}
+                <div class="skills_content">
+                    <div>
+                        <span>{{ i.skill }}</span>
+                        <span>{{ i.procent }}%</span>
+                    </div>
+                    <div style="background-image: linear-gradient(to right, #106eea {{ i.procent }}%, #e2eefd {{ i.procent|skill }}%);"></div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section class="counts">
+        <div class="counts_container">
+            {% for i in statistics %}
+                <div class="counts_content">
+                    <i class="{{ i.icon }}"></i>
+                    <h1>{{ i.count }}</h1>
+                    <span>{{ i.title }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section class="clients">
+        <div class="clients_container">
+            {% for i in clients %}
+                <img src={{ i.img.url }} />
+            {% endfor %}
+        </div>
+    </section>
+    <section id="services">
+        <div class="title">
+            <span>{{ titles.button2 }}</span>
+            <h1>{{ titles.title2 }} <strong>{{ titles.colored_title2 }}</strong></h1>
+            <p>{{ titles.text2 }}</p>
+        </div>
+        <div class="services_container">
+            {% for i in services %}
+                <div class="services_content">
+                    <i class="fa-brands fa-dribbble"></i>
+                    <h2>Lorem Ipsum</h2>
+                    <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <div style="background-image: url(media/testimonials-bg.jpg);" class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            {% for i in testimonials %}
+                <div class="swiper-slide">
+                    <img src={{ i.img.url }} />
+                    <h3>{{ i.name }}</h3>
+                    <span>{{ i.position }}</span>
+                    <p><i class="fa-solid fa-quote-left"></i>{{ i.text }}<i class="fa-solid fa-quote-right"></i></p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <section id="portfolio">
+        <div class="title">
+            <span>{{ titles.button3 }}</span>
+            <h1>{{ titles.title3 }} <strong>{{ titles.colored_title3 }}</strong></h1>
+            <p>{{ titles.text3 }}</p>
+        </div>
+        <ul>
+            {% for i in categories %}
+                    {% if forloop.counter < 2 %}
+                        <li class="active_type" data-type={{ i.title }} onclick="sortFunc(event, this.getAttribute('data-type'))">{{ i.title }}</li>
+                    {% else %}
+                        <li data-type={{ i.title }} onclick="sortFunc(event, this.getAttribute('data-type'))">{{ i.title }}</li>
+                    {% endif %}
+            {% endfor %}
+        </ul>
+        <div class="portfolio_container">
+            {% for i in portfolio %}
+                <div data-type={{ i.category.title }} class="portfolio_content">
+                    <img src={{ i.img.url }}>
+                    <h2>{{ i.title }}</h2>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section id="team">
+        <div class="title">
+            <span>{{ titles.button4 }}</span>
+            <h1>{{ titles.title4 }} <strong>{{ titles.colored_title4 }}</strong></h1>
+            <p>{{ titles.text4 }}</p>
+        </div>
+        <div class="team_container">
+            {% for i in team %}
+                <div class="team_content">
+                    <div>
+                        <img src={{ i.img.url }} />
+                        <ul>
+                            <li><a href={{ i.social1 }}><i class="fa-brands fa-twitter"></i></a></li>
+                            <li><a href={{ i.social2 }}><i class="fa-brands fa-facebook"></i></a></li>
+                            <li><a href={{ i.social3 }}><i class="fa-brands fa-instagram"></i></a></li>
+                            <li><a href={{ i.social4 }}><i class="fa-brands fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>{{ i.name }}</h3>
+                        <span>{{ i.position }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section id="pricing">
+        <div class="title">
+            <span>{{ titles.button5 }}</span>
+            <h1>{{ titles.title5 }} <strong>{{ titles.colored_title5 }}</strong></h1>
+            <p>{{ titles.text5 }}</p>
+        </div>
+        <div class="pricing_container">
+            {% for i in pricing %}
+                <div class="pricing_content">
+                    {% if i.advanced %}<span>Advanced</span>{% endif %}
+                    <h2 class='{% if forloop.counter > 2 %}{% if forloop.counter < 4 %}active{% endif %}{% endif %}'>{{ i.title }}</h2>
+                    <h1><sup>$</sup>{{ i.price }} <span>/ month</span></h1>
+                    <ul>
+                        {% for j in i.offers.split %}
+                            <li>{{ j }}</li>
+                        {% endfor %}
+                        <a href="#contact">{{ i.button }}</a>
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section class="FAQ">
+        <div class="title">
+            <span>{{ titles.button6 }}</span>
+            <h1>{{ titles.title6 }} <strong>{{ titles.colored_title6 }}</strong></h1>
+            <p>{{ titles.text6 }}</p>
+        </div>
+        <div class="FAQ_container">
+            {% for i in faq %}
+                <div onclick="questionFunc(event)" class="FAQ_content {% if forloop.counter < 2 %}active{% endif %}">
+                    <div>
+                        <i class="fa-solid fa-angle-down"></i>
+                        {{ i.question }}
+                    </div>
+                    <p>{{ i.answer }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section id="contact">
+        <div class="title">
+            <span>{{ titles.button7 }}</span>
+            <h1><strong>{{ titles.colored_title7 }}</strong></h1>
+            <p>{{ titles.text7 }}</p>
+        </div>
+        <div class="contact_container">
+            <ul>
+                {% for i in infos %}
+                    <li>
+                        <i class="{{ i.icon }}"></i>
+                        <h4>{{ i.title }}</h4>
+                        <span>{{ i.info }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="bottom">
+                <iframe src="{{ contact_info.google_map }}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <form method="post">
+                    {% csrf_token %}
+                    <input name="username" placeholder='{{ contact_info.placeholder1 }}' required>
+                    <input type="email" name="email" placeholder='{{ contact_info.placeholder2 }}'' required>
+                    <input name="subject" placeholder='{{ contact_info.placeholder3 }}'' required>
+                    <textarea name="message" placeholder='{{ contact_info.placeholder4 }}' required></textarea>
+                    <button>{{ contact_info.button1 }}</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="newsletter">
+        <h2>{{ contact_info.title }}</h2>
+        <p>{{ contact_info.text }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <input type="email" name="email2" placeholder='{{ contact_info.placeholder5 }}' required>
+            <button>{{ contact_info.button2 }}</button>
+        </form>
+    </section>
+    <footer>
+        <div class="footer_container">
+            <span>© Copyright <strong>BizLand.</strong>  All Rights Reserved</span>
+            <span>Made By Alex Hovsepyan</span>
+        </div>
+    </footer>
+    <a class="back_to_top" href="#home"><i class="fa-solid fa-arrow-up"></i></a>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
